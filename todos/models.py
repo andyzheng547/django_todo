@@ -15,7 +15,7 @@ class Category(models.Model):
 class Todo(models.Model):
     task = models.CharField(max_length=150)
     status = models.BooleanField(default=False)
-    category = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.task
