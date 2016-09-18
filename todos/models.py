@@ -10,7 +10,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-        
+
     @classmethod
     def all(categories):
         return categories.objects.all()

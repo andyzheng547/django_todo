@@ -1,0 +1,18 @@
+<h1>This is the Todos homepage</h1>
+
+{% for todo in todos %}
+  <div class="todo-container">
+    <h4>{{ todo.task }}</h4>
+
+    <ul>
+      <strong>Completed: </strong> {{ todo.completed }}
+    </ul>
+
+    <ul>
+      <strong>Categories: </strong>
+      {% for category in todo.categories.all %}
+        {{ category.name }},
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}

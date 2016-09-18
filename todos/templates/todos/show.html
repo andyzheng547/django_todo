@@ -1,0 +1,11 @@
+<h1>{{ todo.task }}</h1>
+
+<strong>Status: </strong> {{ todo.completed }}
+<br>
+
+<strong>Categories: </strong>
+<ul>
+{% for category in todo.categories.all %}
+  <li>{{ category.name }}</li>
+{% endfor %}
+</ul>
