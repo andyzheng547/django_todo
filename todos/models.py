@@ -8,6 +8,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def todos(self):
+        return self.todo_set.all()
+
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'categories'
