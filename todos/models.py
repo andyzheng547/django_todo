@@ -8,6 +8,9 @@ class Category(models.Model):
     def todos(self):
         return self.todo_set.all()
 
+    def url(self):
+        return "/todos/categories/" + str(self.id)
+
     def __str__(self):
         return self.name
 
@@ -35,6 +38,12 @@ class Todo(models.Model):
     def completed(self):
         completion_status = 'Complete' if self.status else 'Incomplete'
         return completion_status
+
+    def category_names(self):
+        return self.categories.values_list('name', flat=True)
+
+    def url(self):
+        return "/todos/" + str(self.id)
 
     def __str__(self):
         return self.task + ' - ' + self.completed()

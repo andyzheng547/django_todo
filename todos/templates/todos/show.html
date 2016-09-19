@@ -1,11 +1,10 @@
 <h1>{{ todo.task }}</h1>
 
-<strong>Status: </strong> {{ todo.completed }}
-<br>
+<strong>Status: </strong> {{ todo.completed|linebreaks }}
 
 <strong>Categories: </strong>
 <ul>
 {% for category in todo.categories.all %}
-  <li>{{ category.name }}</li>
+  <li><a href="{{ category.url }}">{{ category.name }}</a></li>
 {% endfor %}
 </ul>

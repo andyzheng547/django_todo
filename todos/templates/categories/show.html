@@ -1,0 +1,7 @@
+<h1>{{ category.name }} Todos</h1>
+
+<ul>
+{% for todo in category.todos %}
+  <li><a href="{{ todo.url }}">{{todo.task}}</a></li>
+{% endfor %}
+</ul>

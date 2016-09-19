@@ -8,5 +8,9 @@ urlpatterns = [
     # /todos/:id
     url(r'^(?P<todo_id>[0-9]+)/?$', views.todos_show, name='todos_show'),
 
-    url(r'^categories/?', views.categories_index, name='categories_index')
+    # /todos/categories
+    url(r'^categories/?$', views.categories_index, name='categories_index'),
+
+    # /todos/categories/:id
+    url(r'^categories/(?P<category_id>[0-9]+)/?$', views.categories_show, name='categories_show')
 ]

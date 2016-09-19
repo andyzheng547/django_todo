@@ -12,3 +12,7 @@ def todos_show(request, todo_id):
 def categories_index(request):
     categories = Category.all()
     return render(request, 'categories/index.html', {'categories': categories})
+
+def categories_show(request, category_id):
+    category = Category.objects.get(id=category_id)
+    return render(request, 'categories/show.html', {'category': category})
