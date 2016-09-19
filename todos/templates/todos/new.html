@@ -1,5 +1,8 @@
 <h1>Create a new Todo</h1>
 
+<a href="{% url 'todos:index' %}">Todos</a>
+<a href="{% url 'todos:categories_index' %}">Categories</a>
+
 {% if errors %}
   <h3>Errors</h3>
   <ul>

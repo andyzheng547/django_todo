@@ -1,4 +1,7 @@
-<h1>This is the Todos homepage</h1>
+<h1>Todos Index</h1>
+
+<a href="{% url 'todos:categories_index' %}">Categories</a>
+<a href="{% url 'todos:new' %}">New todo</a>
 
 {% for todo in todos %}
   <div class="todo-container">

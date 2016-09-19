@@ -1,6 +1,9 @@
 <h1>{{ category.name }} Todos</h1>
 
+<a href="{% url 'todos:index' %}">Todos</a>
+<a href="{% url 'todos:categories_index' %}">Categories</a>
 <a href="{% url 'todos:categories_edit' category.id %}">Edit category</a>
+<br><br>
 
 <form action="{% url 'todos:categories_delete' category.id %}" method="post">
   {% csrf_token %}

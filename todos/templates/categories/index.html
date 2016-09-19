@@ -1,4 +1,7 @@
-<h1>Categories</h1>
+<h1>Categories Index</h1>
+
+<a href="{% url 'todos:index' %}">Todos</a>
+<a href="{% url 'todos:categories_new' %}">New category</a>
 
 <ul>
 {% for category in categories %}

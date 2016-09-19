@@ -1,6 +1,9 @@
 <h1>{{ todo.task }}</h1>
 
+<a href="{% url 'todos:index' %}">Todos</a>
+<a href="{% url 'todos:categories_index' %}">Categories</a>
 <a href="{% url 'todos:edit' todo.id %}">Edit todo</a>
+<br><br>
 
 <form action="{% url 'todos:delete' todo.id %}" method="post">
   {% csrf_token %}
