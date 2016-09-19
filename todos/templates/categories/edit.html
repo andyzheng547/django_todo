@@ -1,0 +1,19 @@
+<h1>Edit - {{ category.name }} Category</h1>
+
+{% if errors %}
+  <h3>Errors</h3>
+  <ul>
+  {% for error in errors %}
+    <li> {{ error }} </li>
+  {% endfor %}
+  </ul>
+{% endif %}
+
+<form action="{% url 'todos:categories_update' category.id %}" method="post">
+  {% csrf_token %}
+
+  <label for="category[name]">Category: </label>
+  <input type="text" name="category[name]" placeholder="Name of the category" value="{{ category.name }}">
+
+  <input type="submit" value="Update Category">
+</form>

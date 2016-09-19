@@ -1,5 +1,12 @@
 <h1>{{ category.name }} Todos</h1>
 
+<a href="{% url 'todos:categories_edit' category.id %}">Edit category</a>
+
+<form action="{% url 'todos:categories_delete' category.id %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Delete Category">
+</form>
+
 <ul>
 {% for todo in category.todos %}
   <li><a href="{% url 'todos:show' todo.id %}">{{todo.task}}</a></li>

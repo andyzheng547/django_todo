@@ -12,7 +12,7 @@ def todos_index(request):
 
 # GET /todos/<todo_id>
 def todos_show(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
+    todo = get_object_or_404(Todo, id=todo_id)
     return render(request, 'todos/show.html', {'todo': todo})
 
 # GET /todos/new
@@ -40,17 +40,20 @@ def todos_create(request):
         todo.categories = category_ids
         todo.save()
 
-    return redirect('todos:index')
+        return redirect('todos:index')
+    else:
+        return render(request, 'todos/new.html', {'categories': Category.all(), 'errors': ['You cannot leave the Todo task blank']})
+
 
 # GET /todos/<todo_id>/edit
 def todos_edit(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
+    todo = get_object_or_404(Todo, id=todo_id)
     categories = Category.all()
     return render(request, 'todos/edit.html', {'todo': todo, 'categories': categories})
 
 # PUT /todos/<todo_id>/update
 def todos_update(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
+    todo = get_object_or_404(Todo, id=todo_id)
     params = request.POST
 
     if params.get('todo[task]'):
@@ -76,14 +79,55 @@ def todos_update(request, todo_id):
 
 # DELETE /todos/<todo_id>/delete
 def todos_delete(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
+    todo = get_object_or_404(Todo, id=todo_id)
     todo.delete()
     return redirect('todos:index')
 
+# GET /todos/categories
 def categories_index(request):
     categories = Category.all()
     return render(request, 'categories/index.html', {'categories': categories})
 
+# GET /todos/categories/<category_id>
 def categories_show(request, category_id):
-    category = Category.objects.get(id=category_id)
+    category = get_object_or_404(Category, id=category_id)
     return render(request, 'categories/show.html', {'category': category})
+
+# GET /todos/categories/new
+def categories_new(request):
+    return render(request, 'categories/new.html')
+
+# POST /todos/categories/create
+def categories_create(request, category_id):
+    category = Category()
+    params = request.POST
+
+    if params.get('category[name]'):
+        category.name = params.get('category[name]')
+        category.save()
+        return redirect('todos:categories_show', category_id=category_id)
+    else:
+        return render(request, 'categories/new.html', {'errors': ['You cannot leave the Category name blank']})
+
+# GET /todos/categories/<category_id>/edit
+def categories_edit(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    return render(request, 'categories/edit.html', {'category': category})
+
+# POST /todos/categories/<category_id>/update
+def categories_update(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    params = request.POST
+
+    if params.get('category[name]'):
+        category.name = params.get('category[name]')
+        category.save()
+        return redirect('todos:categories_show', category_id=category_id)
+    else:
+        return render(request, 'categories/edit.html', {'category': category, 'errors': ['You cannot leave the Category name blank']})
+
+# DELETE /todos/categories/<category_id>/delete
+def categories_delete(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    category.delete()
+    return redirect('todos:categories_index')
