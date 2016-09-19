@@ -1,0 +1,19 @@
+<h1>Create a new Todo</h1>
+
+<form action="{% url 'todos:create' %}" method="post">
+  {% csrf_token %}
+
+  <label for="todo[task]">Task</label>
+  <input type="text" name="todo[task]" placeholder="Enter a todo">
+
+  <select multiple name="todo[category_ids]" aria-label="category_ids">
+    <option value="" disabled="disabled">Optional select a category</option>
+    {% for cat in categories %}
+      <option value="{{ cat.id }}">{{ cat.name }}</option>
+    {% endfor %}
+  </select>
+
+  <input type="text" name="new_category[name]" placeholder="Create a new category">
+
+  <input type="submit" value="New Todo">
+</form>
