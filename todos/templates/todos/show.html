@@ -1,5 +1,12 @@
 <h1>{{ todo.task }}</h1>
 
+<a href="{% url 'todos:edit' todo.id %}">Edit todo</a>
+
+<form action="{% url 'todos:delete' todo.id %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Delete Todo">
+</form>
+
 <strong>Status: </strong> {{ todo.completed|linebreaks }}
 
 <strong>Categories: </strong>

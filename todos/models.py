@@ -6,18 +6,24 @@ class Category(models.Model):
     name = models.CharField(max_length=20)
 
     def todos(self):
-        return self.todo_set.all()
+        return self.todo_set.all().order_by('id')
+
+    def todo_tasks(self):
+        return self.todos().values_list('task', flat=True)
+
+    def todo_ids(self):
+        return self.todos().values_list('id', flat=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id) + ' - ' + self.name
 
     @classmethod
     def all(categories):
-        return categories.objects.all()
+        return categories.objects.all().order_by('id')
 
     @classmethod
     def first(categories):
-        return categories.objects.first()
+        return categories.objects.order_by('id').first()
 
     @classmethod
     def last(categories):
@@ -39,16 +45,19 @@ class Todo(models.Model):
     def category_names(self):
         return self.categories.values_list('name', flat=True)
 
+    def category_ids(self):
+        return self.categories.values_list('id', flat=True)
+
     def __str__(self):
-        return self.task + ' - ' + self.completed()
+        return str(self.id) + ' - ' + self.task + ' - ' + self.completed()
 
     @classmethod
     def all(todos):
-        return todos.objects.all()
+        return todos.objects.all().order_by('id')
 
     @classmethod
     def first(todos):
-        return todos.objects.first()
+        return todos.objects.order_by('id').first()
 
     @classmethod
     def last(todos):

@@ -16,6 +16,15 @@ urlpatterns = [
     # POST /todos/create
     url(r'^create/?$', views.todos_create, name='create'),
 
+    # GET /todos/<todo_id>/edit
+    url(r'^(?P<todo_id>[0-9]+)/edit/?$', views.todos_edit, name='edit'),
+
+    # PUT /todos/<todo_id>/update
+    url(r'^(?P<todo_id>[0-9]+)/update/?$', views.todos_update, name='update'),
+
+    # DELETE /todos/<todo_id>/delete
+    url(r'^(?P<todo_id>[0-9]+)/delete/?$', views.todos_delete, name='delete'),
+
     # GET /todos/categories
     url(r'^categories/?$', views.categories_index, name='categories_index'),
 
