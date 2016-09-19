@@ -2,7 +2,7 @@
 
 {% for todo in todos %}
   <div class="todo-container">
-    <h4><a href="{{ todo.url }}">{{ todo.task }}</a></h4>
+    <h4><a href="{% url 'todos:show' todo.id %}">{{ todo.task }}</a></h4>
 
     <ul>
       <strong>Status: </strong> {{ todo.completed }}
@@ -11,7 +11,7 @@
     <ul>
       <strong>Categories: </strong>
       {% for category in todo.categories.all %}
-        <a href="{{ category.url }}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+        <a href="{% url 'todos:categories_show' category.id %}">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
       {% endfor %}
     </ul>
   </div>

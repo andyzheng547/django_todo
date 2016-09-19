@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Category, Todo
+
+# Http 404 error when not in development
+# get_object_or_404(Model, id=model_id) instead of Model.objects.get(id=model_id)
 
 def todos_index(request):
     todos = Todo.all()

@@ -2,6 +2,6 @@
 
 <ul>
 {% for todo in category.todos %}
-  <li><a href="{{ todo.url }}">{{todo.task}}</a></li>
+  <li><a href="{% url 'todos:show' todo.id %}">{{todo.task}}</a></li>
 {% endfor %}
 </ul>
